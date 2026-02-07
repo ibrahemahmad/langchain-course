@@ -3,13 +3,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain.agents import create_agent
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_tavily import TavilySearch
 
 from schemas import AgentResponse
 
 tools = [TavilySearch()]
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOllama(
+    model="lfm2.5-thinking",
+    temperature=0.7,
+)
 
 
 agent = create_agent(
