@@ -1,42 +1,16 @@
-from dotenv import load_dotenv
 
-load_dotenv()
-
-from langchain.agents import create_agent
-from langchain_ollama import ChatOllama
-from langchain_tavily import TavilySearch
-
-from schemas import AgentResponse
-
-tools = [TavilySearch()]
-llm = ChatOllama(
-    model="lfm2.5-thinking",
-    temperature=0.7,
-)
-
-
-agent = create_agent(
-    model=llm,
-    tools=tools,
-    response_format=AgentResponse,
-)
-
+def tell_me_a_joke():
+# this is comment
+    """
+    We are only returning a joke here, but in a real application, this function could be more complex,
+    """
+    return "Why don't scientists trust atoms? Because they make up everything!"
 
 def main():
-    result = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "search for 3 job postings for an ai engineer using langchain in the bay area on linkedin and list their details",
-                }
-            ]
-        }
-    )
-    # Access structured response from the agent
-    structured = result.get("structured_response", None)
-    print(structured if structured is not None else result)
+    joke = tell_me_a_joke()
+    print(joke) 
+        
 
-
-if __name__ == "__main__":
+if __name__ == "__main__": 
+    # to know this file only runs when we execute it directly, and not when we import it as a module in another file.
     main()
